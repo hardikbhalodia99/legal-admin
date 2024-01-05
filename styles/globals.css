@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* PHONE NUMBER INPUT */
+@import 'react-phone-number-input/style.css';
+@import 'react-credit-cards-2/dist/es/styles-compiled.css';
+
+/* FONTS */
+@font-face {
+    font-family: "SFPro-Bold";
+    src: url('../public/fonts/SFPRODISPLAYBOLD.OTF');
+}
+
+@font-face {
+    font-family: "SFPro-Medium";
+    src: url('../public/fonts/SFPRODISPLAYMEDIUM.OTF');
+}
+
+@font-face {
+    font-family: "SFPro-Regular";
+    src: url('../public/fonts/SFPRODISPLAYREGULAR.OTF');
+}
+
+@font-face {
+    font-family: 'MabryPro-Black';
+    src: url('../public/fonts/MabryPro-Black.ttf');
+}
+
+@font-face {
+    font-family: 'MabryPro-Bold';
+    src: url('../public/fonts/MabryPro-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'MabryPro-Medium';
+    src: url('../public/fonts/MabryPro-Medium.ttf');
+}
+
+@font-face {
+    font-family: 'MabryPro-Regular';
+    src: url('../public/fonts/MabryPro-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'MabryPro-Light';
+    src: url('../public/fonts/MabryPro-Light.ttf');
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.container {
+    max-width: 100%;
+}
+
+/* AUTHENTICATION */
+.auth-banner {
+    background-image: url('../public/images/banners/auth-banner.jpg');
+    background-size: cover;
+}
+
+/* PAYMENT BANNER */
+.payment-banner {
+    background-image: url('../public/images/banners/payment-banner.jpg');
+    background-size: cover;
+}
+
+/* FORMS */
+.form-tabs {
+    font-size: 14px;
+    font-family: "Figtree", sans-serif !important;
+    color: #101727;
+    text-align: left !important;
+    margin-bottom: 5px;
+}
+
+.form-control {
+    font-family: "Figtree", sans-serif !important;
+}
+
+.PhoneInput {
+    border-bottom: 1px solid #DDDDE6;
+    padding-bottom: 12px;
+}
+
+.PhoneInput .PhoneInputInput {
+    padding-left: 10px;
+}
+
+.PhoneInput .PhoneInputInput::placeholder {
+    font-size: 14px;
+    font-weight: 500;
+    color: #575762;
+}
+
+.PhoneInput .PhoneInputCountry {
+    border-right: 1px solid #DDDDE6;
+    padding-right: 15px;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+    appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.rccs .rccs__card {
+    width: 100% !important;
+    height: 150px;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}

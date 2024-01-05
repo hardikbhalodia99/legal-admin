@@ -1,0 +1,37 @@
+{
+  "name": "lwm-revamp",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.0.18",
+    "@iconscout/react-unicons": "^2.0.2",
+    "@material-tailwind/react": "^2.1.1",
+    "@tailwindcss/typography": "^0.5.10",
+    "@tanstack/react-table": "^8.10.7",
+    "appwrite": "^12.0.0",
+    "autoprefixer": "10.4.15",
+    "axios": "^1.5.0",
+    "cookies": "^0.8.0",
+    "daisyui": "^4.4.19",
+    "dayjs": "^1.11.10",
+    "eslint": "8.48.0",
+    "eslint-config-next": "13.4.19",
+    "next": "13.4.19",
+    "node-appwrite": "^10.0.1",
+    "postcss": "8.4.28",
+    "react": "18.2.0",
+    "react-credit-cards-2": "^1.0.1",
+    "react-dom": "18.2.0",
+    "react-images-uploading": "^3.1.7",
+    "react-modal": "^3.16.1",
+    "react-phone-number-input": "^3.3.4",
+    "react-toastify": "^9.1.3",
+    "tailwindcss": "3.3.3"
+  }
+}

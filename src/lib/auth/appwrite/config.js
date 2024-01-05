@@ -1,0 +1,2 @@
+export const endpoint = process.env.APPWRITE_ENDPOINT ? process.env.APPWRITE_ENDPOINT : "https://appwrite.climes.io/v1";
+export const project = process.env.APPWRITE_PROJECT_ID ? process.env.APPWRITE_PROJECT_ID : "64bb9b3e2162e6d40866"
