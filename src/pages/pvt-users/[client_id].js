@@ -1,22 +1,16 @@
 import Head from "next/head";
 import React from "react";
-import PvtUsersComponent from "@/src/components/PvtUsers";
 import withAuthUserTokenSSR from "@/src/lib/auth/appwrite/withAuthUserTokenSSR";
-import { getOrders } from "../api/orders/get-orders";
-import PageHeader from "@/src/components/core/PageHeader";
 
-export default function PvtUsers({users}) {
-	console.log("%c 🍣 users", "color:#ea7e5c", users);
+export default function PvtFormData() {
 	return (
 		<div>
 			<section className="py-5 px-10 h-[calc(100vh-65px)] overflow-auto overflow-x-hidden">
 				<Head>
 					<title>User Management</title>
 				</Head>
-				<div className="container">
-				<PageHeader title="Private Ltd Clients" description={"All your clients at one place"}/>
-				<PvtUsersComponent data={users}/>
-				</div>
+
+				
 			</section>
 		</div>
 	);
@@ -28,15 +22,14 @@ export const getServerSideProps = withAuthUserTokenSSR({})(async (context) => {
 	const cookie = context.req.cookies;
 	console.log("%c 🥃 cookie", "color:#3f7cff", cookie);
 
-	const data = await getOrders({
+	const data = await getEmployees({
 		cookie : cookie,
-		token : token,
-		slug : "pvt-ltd"
+		token : token
 	})
   if(user && user.$id){
 		return {
 			props : {
-				users : data.orders
+				employees : data.employees
 			}
 		}
   }else{

@@ -1,5 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import styles from "./styles.module.css"
+import nProgress from "nprogress"
 
 /* NEXT COMPONENTS */
 import Image from "next/image";
@@ -24,12 +26,15 @@ import {
 	MenuList,
 } from "@material-tailwind/react";
 import { useAuth } from "../lib/auth/appwrite/useAuth";
-import { useRouter } from "next/router";
+import { Router, useRouter } from "next/router"
 
 const DashboardHeader = () => {
 	const [mobileNavbar, setMobileNavbar] = useState(false);
 	const { logoutUser } = useAuth();
 	const router = useRouter();
+	const [delayedStep, setDelayedStep] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
+
 
 	const handleLogoutSubmit = async () => {
 		try {
@@ -41,9 +46,34 @@ const DashboardHeader = () => {
 		}
 	};
 
+	useEffect(() => {
+    if (router.pathname === "/sign-in") {
+      return
+    }
+    Router.events.on("routeChangeStart", (url) => {
+      setIsLoading(true)
+      nProgress.start()
+    })
+
+    Router.events.on("routeChangeComplete", (url) => {
+      setIsLoading(false)
+			if(delayedStep){
+        console.log("delayed step was" , delayedStep);
+        console.log("setting delayed step to" , false);
+        setDelayedStep(false);
+      }
+      nProgress.done()
+    })
+
+    Router.events.on("routeChangeError", (url) => {
+      setIsLoading(false)
+      nProgress.done()
+    })
+  }, [delayedStep, router.pathname])
+
 	return (
-		<Navbar className="p-0 shadow-none w-full max-w-full border-0">
-			<header className="py-2 px-4 xl:px-5 lg:px-5 md:px-4 bg-white border-b border-b-bright-gray">
+		<Navbar className={`z-20 p-0 shadow-none w-full max-w-full ${isLoading ? "" : styles.navbarBorder}`}>
+			<header className={`py-2 px-4 xl:px-5 lg:px-5 md:px-4 bg-white ${isLoading ? "" : styles.navbarBorder}`}>
 				<div className="container mx-auto">
 					<div className="flex items-center justify-between">
 						<div className="flex items-center">

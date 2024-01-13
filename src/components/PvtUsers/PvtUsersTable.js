@@ -32,9 +32,8 @@ export default function PvtUsersTable({totalCount,defaultData,columns}) {
             const paginationObj = { ...paginationState, cursor: data[0].id, pageNumber: paginationState.pageNumber - 1 };
           }
         }}
-        onRowClick={(id) => {
-         
-         
+        onRowClick={(rowData) => {
+          router.push(`/pvt-users/${rowData.client_id}`)
         }}
         onRowCountSelect={async (count) => {
           dispatch({ type: 'PER_PAGE_COUNT', payload: count });
