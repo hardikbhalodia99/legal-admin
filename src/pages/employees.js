@@ -32,7 +32,7 @@ export const getServerSideProps = withAuthUserTokenSSR({})(async (context) => {
   if(user && user.$id){
 		return {
 			props : {
-				employees : data.employees
+				employees : data?.employees
 			}
 		}
   }else{

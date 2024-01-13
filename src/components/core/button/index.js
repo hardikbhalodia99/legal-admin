@@ -32,6 +32,8 @@ export default function Button({
         return `${hollow ? "text-warning bg-white border-2 border-warning" : "bg-warning text-white"}`
       case "caution":
         return `${hollow ? "text-caution bg-white border-2 border-caution" : "bg-caution text-white"}`
+        case "success":
+          return `${hollow ? "text-caution bg-white border-2 border-caution" : "bg-green-400 text-white"}`
       default:
         return `${hollow ? "text-primary bg-white border-2 border-primary" : "bg-primary text-white"}`
     }
@@ -69,7 +71,7 @@ export default function Button({
     >
       <div className="flex flex-row gap-2 items-center justify-center">
          {icon ? <div>{icon}</div> : null}
-        <div className="flex flex-row gap-2 items-center">{loading ? <LoadingSpinner /> : null}{label}</div>
+        <div className="flex flex-row gap-2 items-center">{label}</div>
       </div>
      
     </TButton>
