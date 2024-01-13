@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
+import withAuthUserTokenSSR from '../lib/auth/appwrite/withAuthUserTokenSSR';
 
 const Dashboard = () => {
   return (
@@ -20,5 +21,21 @@ const Dashboard = () => {
     </section>
   );
 }
+
+export const getServerSideProps = withAuthUserTokenSSR({})(async (context) => {
+
+  const { user,token} = context;
+
+  if(user && user.$id){
+    
+  }else{
+    return {
+      redirect : {
+        permanent : false,
+        destination : "/sign-in"
+      }
+    }
+  }
+})
 
 export default Dashboard

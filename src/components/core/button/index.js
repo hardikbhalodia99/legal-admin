@@ -1,4 +1,5 @@
 import { Button as TButton } from "@material-tailwind/react";
+import LoadingSpinner from "../../others/loading-spinner";
 
 
 export default function Button({
@@ -14,7 +15,6 @@ export default function Button({
   btnType,
   icon,
   label,
-  ...rest
 }) {
   const handleClick = () => {
     if (!disabled && onClick) {
@@ -54,20 +54,22 @@ export default function Button({
   return (
     <TButton
       size={selectedSize()}
-      disabled={disabled}
+      disabled={loading || disabled}
+      loading={loading}
       className={`
         ${selectedTheme()} 
         ${className}
         ${icon ? "gap-2" : null}
         ${full ? "w-full " : ""}
+
       `}
       onClick={handleClick}
       type={btnType}
-      {...rest}
+     
     >
       <div className="flex flex-row gap-2 items-center justify-center">
          {icon ? <div>{icon}</div> : null}
-        <div>{label}</div>
+        <div className="flex flex-row gap-2 items-center">{loading ? <LoadingSpinner /> : null}{label}</div>
       </div>
      
     </TButton>

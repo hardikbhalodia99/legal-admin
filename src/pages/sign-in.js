@@ -5,7 +5,7 @@ import React from "react";
 import Head from "next/head";
 
 import withAuthUserTokenSSR from "../lib/auth/appwrite/withAuthUserTokenSSR";
-import SignInComponent from "../components/sign-in";
+import SignInComponent from "../components/sign-in/index";
 
 const AuthLogin = () => {
   return (
