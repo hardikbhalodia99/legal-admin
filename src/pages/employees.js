@@ -39,7 +39,7 @@ export const getServerSideProps = withAuthUserTokenSSR({})(async (context) => {
 		return {
       redirect : {
         permanent : false,
-        destination : "/"
+        destination : "/sign-in"
       }
     }
   }
