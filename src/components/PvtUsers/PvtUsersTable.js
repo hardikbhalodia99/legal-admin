@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 import TableComponent from '../core/table';
 import { usePagination } from '@/src/utils/pagination';
 import { getCoreRowModel, useReactTable, getFilteredRowModel } from '@tanstack/react-table';
+import { useRouter } from 'next/router';
 
 export default function PvtUsersTable({totalCount,defaultData,columns}) {
   const [loading,setLoading] = useState(false)
   const [data, setData] = useState(defaultData);
   const { state: paginationState, dispatch } = usePagination();
   const [total, setTotal] = useState(totalCount);
-
+  const router = useRouter()
   const table = useReactTable({
     data,
     columns,

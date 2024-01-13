@@ -72,7 +72,7 @@ const DashboardHeader = () => {
   }, [delayedStep, router.pathname])
 
 	return (
-		<Navbar className={`z-20 p-0 shadow-none w-full max-w-full ${isLoading ? "" : styles.navbarBorder}`}>
+		<Navbar className={`z-20 p-0 shadow-none w-full max-w-full bg-white ${isLoading ? "" : styles.navbarBorder}`}>
 			<header className={`py-2 px-4 xl:px-5 lg:px-5 md:px-4 bg-white ${isLoading ? "" : styles.navbarBorder}`}>
 				<div className="container mx-auto">
 					<div className="flex items-center justify-between">
