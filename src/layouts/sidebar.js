@@ -9,14 +9,14 @@ import { usePathname } from "next/navigation";
 /* NAVIGATION MENU DATA */
 import { topMenu, bottomMenu } from "@/src/navigation/menu";
 
-const Sidebar = () => {
+const Sidebar = ({mobileNavbar, setMobileNavbar}) => {
 	const pathName = usePathname();
 
 	return (
-		<div className="py-5 bg-white border-r border-r-bright-gray h-[calc(100vh-68px)] hidden xl:flex lg:flex md:flex justify-between flex-col">
+		<div className={mobileNavbar ? "py-5 bg-white border-r border-r-bright-gray h-[calc(100vh-68px)] block xl:flex lg:flex md:flex justify-between flex-col": "py-5 bg-white border-r border-r-bright-gray h-[calc(100vh-68px)] hidden xl:flex lg:flex md:flex justify-between flex-col"} >
 			<div>
 				{topMenu.map((menu) => (
-					<Link href={menu.link} key={menu.id}>
+					<Link href={menu.link} onClick={()=>{setMobileNavbar(false)}} key={menu.id}>
 						<div
 							className={`flex items-center pl-5 pr-5 pt-[10px] pb-[10px] ${
 								pathName === menu.link
@@ -38,7 +38,7 @@ const Sidebar = () => {
 
 			<div>
 				{bottomMenu.map((menu) => (
-					<Link href={menu.link} key={menu.id} className="">
+					<Link href={menu.link} onClick={()=>{setMobileNavbar(false)}} key={menu.id} className="">
 						<div className="flex items-center pl-5 pr-5 pt-[10px] pb-[10px] hover:bg-black hover:bg-opacity-5 hover:border-r-2 border-r-[#101727]">
 						<div className="flex flex-row items-center gap-2">
 								<div>{menu.icon}</div>
