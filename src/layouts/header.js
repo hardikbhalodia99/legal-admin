@@ -26,8 +26,8 @@ import {
 import { useAuth } from "../lib/auth/appwrite/useAuth";
 import { useRouter } from "next/router";
 
-const DashboardHeader = () => {
-	const [mobileNavbar, setMobileNavbar] = useState(false);
+const DashboardHeader = ({ setMobileNavbar, mobileNavbar }) => {
+
 	const { logoutUser } = useAuth();
 	const router = useRouter();
 

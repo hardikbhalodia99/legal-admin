@@ -3,11 +3,10 @@ import Button from "../../core/button";
 import { UserPlusIcon } from "@heroicons/react/24/outline";
 import { EmployeesTable } from "./EmployeesTable";
 
-export default function Employees({employees}) {
+export default function Employees({ employees }) {
 	return (
 		<div>
-			
-      <EmployeesTable  employees={employees}/>
+			<EmployeesTable employees={employees} />
 		</div>
 	);
 }
