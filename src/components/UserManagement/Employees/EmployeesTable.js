@@ -1,4 +1,4 @@
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { MagnifyingGlassIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
 import {
 	Card,
@@ -35,7 +35,6 @@ export function EmployeesTable({employees}) {
   const [open, setOpen] = useState(false);
   const [selectedEmployee,setSelectedEmployee] = useState(null)
   const handleOpen = () => setOpen((cur) => !cur);
-
 	return (
     <>
       <Card className="h-full w-full">
@@ -63,7 +62,7 @@ export function EmployeesTable({employees}) {
                 size="small"
                 icon={<UserPlusIcon className="w-5 h-5" />}
                 label="Add Employee"
-                onClick={() => {setSelectedEmployee(null);handleOpen()}}
+                onClick={() => {setSelectedEmployee(null); handleOpen(true)}}
               />
             </div>
           </div>
@@ -89,7 +88,7 @@ export function EmployeesTable({employees}) {
               </tr>
             </thead>
             <tbody>
-              {data.map((eachEmployee, index) => {
+              {data?.map((eachEmployee, index) => {
                   const isLast = index === data.length - 1;
                   const classes = isLast
                     ? "p-4"
@@ -150,8 +149,8 @@ export function EmployeesTable({employees}) {
                           <Chip
                             variant="ghost"
                             size="sm"
-                            value={!eachEmployee.disabled ? "Active" : "Disabled"}
-                            color={!eachEmployee.disabled ? "green" : "blue-gray"}
+                            value={eachEmployee.disabled === 0 ? "Active" : "Disabled"}
+                            color={eachEmployee.disabled === 0 ? "green" : "blue-gray"}
                           />
                         </div>
                       </td>
@@ -160,10 +159,19 @@ export function EmployeesTable({employees}) {
                         <Tooltip content="Edit User">
                           <IconButton variant="text" onClick={()=>{
                             setSelectedEmployee(eachEmployee)
+                            handleOpen(true)
                           }}>
                             <PencilIcon className="h-4 w-4" />
                           </IconButton>
                         </Tooltip>
+                        {/* <Tooltip content="Remove User">
+                          <IconButton variant="text" onClick={()=>{
+                            setSelectedEmployee(eachEmployee)
+                            handleOpen(true)
+                          }}>
+                            <TrashIcon className="h-4 w-4" />
+                          </IconButton>
+                        </Tooltip> */}
                       </td>
                     </tr>
                   );
@@ -182,7 +190,7 @@ export function EmployeesTable({employees}) {
           </div>
         </CardFooter>
       </Card>
-      <AddEmployeeModal open={open} handleOpen={handleOpen} selectedEmployee={selectedEmployee}/>
+      <AddEmployeeModal open={open} handleOpen={handleOpen} setData={setData} selectedEmployee={selectedEmployee}/>
     
     </>
 	);

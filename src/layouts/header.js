@@ -28,8 +28,8 @@ import {
 import { useAuth } from "../lib/auth/appwrite/useAuth";
 import { Router, useRouter } from "next/router"
 
-const DashboardHeader = () => {
-	const [mobileNavbar, setMobileNavbar] = useState(false);
+const DashboardHeader = ({ setMobileNavbar, mobileNavbar }) => {
+
 	const { logoutUser } = useAuth();
 	const router = useRouter();
 	const [delayedStep, setDelayedStep] = useState(false);
