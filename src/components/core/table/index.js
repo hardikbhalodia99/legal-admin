@@ -24,7 +24,7 @@ const TableComponent = ({
           <div className="overflow-hidden  ">
             <table className="min-w-full text-center">
               <thead className="">
-                {table.getHeaderGroups().map((headerGroup) => (
+                {table && table?.getHeaderGroups()?.map((headerGroup) => (
                   <tr className="last:pr-8" key={headerGroup.id}>
                     {headerGroup.headers.map((header) => (
                       <th
@@ -52,13 +52,13 @@ const TableComponent = ({
                   </tr>
                 ))}
               </thead>
-              <tbody className="relative ">
-                {table.getRowModel().rows.length <= 0 && loading ? (
+              <tbody className="relative rounded-2xl">
+                {table?.getRowModel().rows.length <= 0 && loading ? (
                   <div className="flex items-center justify-center w-full h-28">
                     <progress className="absolute left-0 right-0 w-56 mx-auto progress"></progress>
                   </div>
                 ) : (
-                  table.getRowModel().rows.map((row) => (
+                  table?.getRowModel().rows.map((row) => (
                     <tr key={row.id} className={`border-b bg-white even:bg-[#F7F6F7] ${onRowClick ? 'cursor-pointer' : ''}`}>
                       {row.getVisibleCells().map((cell) => (
                         <td
@@ -76,7 +76,7 @@ const TableComponent = ({
                   ))
                 )}
 
-                {table.getRowModel().rows.length === 0 && !loading ? (
+                {table?.getRowModel().rows.length === 0 && !loading ? (
                   <div className="flex items-center justify-center w-full h-28">
                     <div className="absolute left-0 right-0 w-56 mx-auto text-black">No Data Available</div>
                   </div>
@@ -84,7 +84,7 @@ const TableComponent = ({
               </tbody>
               {showFooter ? (
                 <tfoot className="border-t bg-gray-50">
-                  {table.getFooterGroups().map((footerGroup) => (
+                  {table?.getFooterGroups().map((footerGroup) => (
                     <tr key={footerGroup.id}>
                       {footerGroup.headers.map((header) => (
                         <th key={header.id} colSpan={header.colSpan}>
@@ -103,10 +103,10 @@ const TableComponent = ({
                   <select
                     style={{ border: '1px solid #000' }}
                     className="!border rounded-lg py-0.5 outline-none px-1.5 ml-1"
-                    value={pageSize || table.getState().pagination.pageSize}
+                    value={pageSize || table?.getState().pagination.pageSize}
                     onChange={(e) => {
                       onRowCountSelect(Number(e.target.value));
-                      table.setPageSize(Number(e.target.value));
+                      table?.setPageSize(Number(e.target.value));
                     }}
                   >
                     {[10, 20, 30, 40, 50].map((pageSize) => (

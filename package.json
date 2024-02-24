@@ -22,6 +22,8 @@
     "dayjs": "^1.11.10",
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
+    "highcharts": "^11.3.0",
+    "highcharts-react-official": "^3.2.1",
     "next": "13.4.19",
     "node-appwrite": "^10.0.1",
     "nprogress": "^0.2.0",
