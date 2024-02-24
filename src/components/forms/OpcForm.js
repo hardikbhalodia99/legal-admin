@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 
 /* NEXTJS IMPORTS */
 import Head from "next/head";
@@ -16,10 +16,10 @@ import {
 } from "@/src/components/core/mui-tailwind";
 
 /* TAB COMPONENTS */
-import CompanyDetails from "@/src/components/forms/companyDetails";
-import OfficeDetails from "@/src/components/forms/officeDetails";
-import PartnerDetails from "@/src/components/forms/partnerDetails";
-import NomineeDetails from "@/src/components/forms/nomineeDetails";
+import CompanyDetails from "@/src/components/forms/CompanyDetails";
+import OfficeDetails from "@/src/components/forms/OfficeDetails";
+import PartnerDetails from "@/src/components/forms/Directors/index";
+import MultipleNominees from "@/src/components/forms/Nominee/index";
 
 /* ICONS */
 import {
@@ -29,7 +29,13 @@ import {
   ShieldCheckIcon,
 } from "@heroicons/react/24/outline";
 
-const OPCForms = () => {
+const OPCForms = ({formData,formFilled}) => {
+  const [companyDetails,setCompanyDetails] = useState(formData && formData.companyDetails ? formData.companyDetails : {})
+  const [officeDetails,setOfficeDetails] = useState(formData && formData.officeDetails ? formData.officeDetails : {})
+  const [directorDetails,setDirectorDetails] = useState(formData && formData.directorDetails ? formData.directorDetails : [])
+  const [nomineeDetails,setNomineeDetails] = useState(formData && formData.nomineeDetails ? formData.nomineeDetails : [])
+
+  const faceName = "Director"
   return (
     <section className="py-5 px-5 xl:px-10 lg:px-10 h-full xl:h-[calc(100vh-68px)] lg:h-[calc(100vh-68px)] md:h-full overflow-auto overflow-x-hidden scrollbar-hidden">
       {/* PAGE TITLE */}
@@ -170,7 +176,7 @@ const OPCForms = () => {
                 value="company-details"
                 className="px-0 py-1 h-full"
               >
-                <CompanyDetails formType="one-person-company" />
+                <CompanyDetails companyDetails={companyDetails} setCompanyDetails={setCompanyDetails} />
               </TabPanel>
 
               {/* OFFICE DETAILS */}
@@ -179,25 +185,24 @@ const OPCForms = () => {
                 value="office-details"
                 className="px-0 py-1 h-full"
               >
-                <OfficeDetails />
+                <OfficeDetails officeDetails={officeDetails} setOfficeDetails={setOfficeDetails}/>
               </TabPanel>
 
-              {/* NOMINEE DETAILS */}
+              {/* PARTNER DETAILS */}
               <TabPanel
                 key="nominee-details"
                 value="nominee-details"
                 className="px-0 py-1 h-full"
               >
-                <NomineeDetails />
+                <MultipleNominees formType="opc" nomineeDetails={nomineeDetails}  faceName={"Nominee"}/>
               </TabPanel>
-
-              {/* PARTNER DETAILS */}
-              <TabPanel
+               {/* PARTNER DETAILS */}
+               <TabPanel
                 key="partner-details"
                 value="partner-details"
                 className="px-0 py-1 h-full"
               >
-                <PartnerDetails formType="one-person-company" />
+                <PartnerDetails formType="opc" directorsDetails={directorDetails}  faceName={faceName}/>
               </TabPanel>
             </TabsBody>
           </div>

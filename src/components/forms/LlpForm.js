@@ -1,43 +1,36 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 
 /* NEXTJS IMPORTS */
 import Head from "next/head";
 
 /* MATERIAL TAILWIND COMPONENTS */
-import {
-  Card,
-  CardBody,
-  Tab,
-  TabsHeader,
-  TabsBody,
-  Tabs,
-  TabPanel,
-} from "@/src/components/core/mui-tailwind";
+import { Card, CardBody, Tab, TabsHeader, TabsBody, Tabs, TabPanel } from "@/src/components/core/mui-tailwind";
 
 /* TAB COMPONENTS */
-import CompanyDetails from "@/src/components/forms/companyDetails";
-import OfficeDetails from "@/src/components/forms/officeDetails";
-import PartnerDetails from "@/src/components/forms/partnerDetails";
+import CompanyDetails from "@/src/components/forms/CompanyDetails";
+import OfficeDetails from "@/src/components/forms/OfficeDetails";
+import PartnerDetails from "@/src/components/forms/Directors/index";
 
 /* ICONS */
-import {
-  BriefcaseIcon,
-  HomeModernIcon,
-  UserGroupIcon,
-} from "@heroicons/react/24/outline";
+import { BriefcaseIcon, HomeModernIcon, UserGroupIcon } from "@heroicons/react/24/outline";
 
-const PVTForms = () => {
+const LLPForms = ({formData,formFilled}) => {
+  const [companyDetails,setCompanyDetails] = useState(formData && formData.companyDetails ? formData.companyDetails : {})
+  const [officeDetails,setOfficeDetails] = useState(formData && formData.officeDetails ? formData.officeDetails : {})
+  const [directorDetails,setDirectorDetails] = useState(formData && formData.directorDetails ? formData.directorDetails : [])
+  const faceName = "Partner"
+
   return (
     <section className="py-5 px-5 xl:px-10 lg:px-10 h-full xl:h-[calc(100vh-68px)] lg:h-[calc(100vh-68px)] md:h-full overflow-auto overflow-x-hidden scrollbar-hidden">
       {/* PAGE TITLE */}
       <Head>
-        <title>Form | Private Limited Registration</title>
+        <title>Form | Limited Liability Partnership Registration</title>
       </Head>
 
       <div className="container">
         <h1 className="text-2xl font-sfpro-bold text-primary-black">
-          Private Limited Registration Form
+          Limited Liability Partnership Registration Form
         </h1>
 
         {/* FORM STEPS */}
@@ -119,7 +112,7 @@ const PVTForms = () => {
                       <div className="text-left ml-3">
                         <div>
                           <h5 className="text-[14px] font-mabry-bold text-[#101727]">
-                            Director Details
+                            {faceName} Details
                           </h5>
                           <p className="text-[12px] text-[#808080] font-mabry-regular">
                             Tell us about your partners
@@ -140,7 +133,7 @@ const PVTForms = () => {
                 value="company-details"
                 className="px-0 py-1 h-full"
               >
-                <CompanyDetails formType="private-limited-registration" />
+                <CompanyDetails companyDetails={companyDetails} setCompanyDetails={setCompanyDetails} />
               </TabPanel>
 
               {/* OFFICE DETAILS */}
@@ -149,7 +142,7 @@ const PVTForms = () => {
                 value="office-details"
                 className="px-0 py-1 h-full"
               >
-                <OfficeDetails />
+                <OfficeDetails officeDetails={officeDetails} setOfficeDetails={setOfficeDetails}/>
               </TabPanel>
 
               {/* PARTNER DETAILS */}
@@ -158,7 +151,7 @@ const PVTForms = () => {
                 value="partner-details"
                 className="px-0 py-1 h-full"
               >
-                <PartnerDetails formType="private-limited-registration" />
+                <PartnerDetails formType="llp" directorsDetails={directorDetails} setDirectorsDetails={setDirectorDetails} faceName={faceName}/>
               </TabPanel>
             </TabsBody>
           </div>
@@ -168,4 +161,4 @@ const PVTForms = () => {
   );
 };
 
-export default PVTForms;
+export default LLPForms;
