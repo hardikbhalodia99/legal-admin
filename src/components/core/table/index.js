@@ -1,5 +1,7 @@
+import { Card, CardBody, CardHeader, Typography } from '@material-tailwind/react';
 import { flexRender, Table } from '@tanstack/react-table';
 import { useMemo } from 'react';
+
 
 const TableComponent = ({
   table,
@@ -15,23 +17,26 @@ const TableComponent = ({
 }) => {
   const currentDataCount = useMemo(() => (Number(currentPage) - 1) * pageSize, [currentPage, pageSize]);
   return (
-    <div className="flex flex-col w-full">
-      <div className="overflow-x-auto">
+    <Card className="flex flex-col w-full">
+
+        <CardBody className="overflow-auto px-0">
         <div className="inline-block min-w-full py-4 p-0.5">
-          <div className="overflow-hidden border border-[#cecece] rounded-2xl ">
-            <table className="min-w-full border-b border-[#cecece] border-separate border-spacing-0 text-center">
+          <div className="overflow-hidden  ">
+            <table className="min-w-full text-center">
               <thead className="">
                 {table.getHeaderGroups().map((headerGroup) => (
                   <tr className="last:pr-8" key={headerGroup.id}>
                     {headerGroup.headers.map((header) => (
                       <th
                         key={header.id}
-                        className="px-5 py-7 bg-white border-b text-left whitespace-nowrap border-b-[#cecece] text-[18px] font-medium text-color-neutral-40 last:pr-10"
+                        className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4"
                       >
                         {header.isPlaceholder ? null : (
-                          <div
+                          <Typography
+                          variant="small"
+                          color="blue-gray"
                             {...{
-                              className: header.column.getCanSort() ? 'cursor-pointer select-none' : '',
+                              className: header.column.getCanSort() ? 'font-normal leading-none opacity-70 cursor-pointer select-none' : 'font-normal leading-none opacity-70',
                               onClick: header.column.getToggleSortingHandler(),
                             }}
                           >
@@ -40,14 +45,14 @@ const TableComponent = ({
                               asc: ' 🔼',
                               desc: ' 🔽',
                             }[header.column.getIsSorted()] ?? null}
-                          </div>
+                          </Typography>
                         )}
                       </th>
                     ))}
                   </tr>
                 ))}
               </thead>
-              <tbody className="relative rounded-2xl">
+              <tbody className="relative ">
                 {table.getRowModel().rows.length <= 0 && loading ? (
                   <div className="flex items-center justify-center w-full h-28">
                     <progress className="absolute left-0 right-0 w-56 mx-auto progress"></progress>
@@ -58,11 +63,8 @@ const TableComponent = ({
                       {row.getVisibleCells().map((cell) => (
                         <td
                           onClick={() => {
-                            onRowClick
-                              ? ['farmer-farm', 'intervention-proof', 'delete-farmer'].includes(cell.column.id)
-                                ? null
-                                : onRowClick(cell.row.original.id)
-                              : null;
+                            onRowClick(row.original)
+                             
                           }}
                           className="whitespace-nowrap px-5 py-6 text-left last:pr-10 text-[18px] leading-6 font-[375] text-black"
                           key={cell.id}
@@ -76,7 +78,7 @@ const TableComponent = ({
 
                 {table.getRowModel().rows.length === 0 && !loading ? (
                   <div className="flex items-center justify-center w-full h-28">
-                    <div className="absolute left-0 right-0 w-56 mx-auto text-black">No Data Found</div>
+                    <div className="absolute left-0 right-0 w-56 mx-auto text-black">No Data Available</div>
                   </div>
                 ) : null}
               </tbody>
@@ -133,8 +135,8 @@ const TableComponent = ({
             )}
           </div>
         </div>
-      </div>
-    </div>
+      </CardBody>
+    </Card>
   );
 };
 
