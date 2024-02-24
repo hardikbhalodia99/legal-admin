@@ -6,7 +6,7 @@ import { DataCard, StatCard } from '../components/others/card';
 
 import { AreaChartComponent, PieChartComponent } from '../components/others/graphs';
 
-import LLPUsers from '../components/LlpUsers';
+import TransactionsTable from '../components/Transactions';
 import { Button } from "@/src/components/core/mui-tailwind";
 
 const Dashboard = () => {
@@ -54,7 +54,7 @@ const Dashboard = () => {
               Save Details
             </Button>
           </div>
-          <LLPUsers />
+          <TransactionsTable />
         </div>
 
 

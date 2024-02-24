@@ -2,6 +2,7 @@ import React from "react";
 import PvtUsersTable from "./PvtUsersTable";
 import { createColumnHelper } from "@tanstack/react-table";
 import { toTitleCase } from "@/src/utils";
+import moment from "moment";
 
 export default function PvtUsers({ totalCount, data }) {
 	console.log("%c 🍯 data", "color:#e41a6a", data);
@@ -22,12 +23,12 @@ export default function PvtUsers({ totalCount, data }) {
 		}),
 		columnHelper.accessor("assigned_to", {
 			header: () => "Assigned",
-			cell: (info) => info.renderValue(),
+			cell: (info) => info.renderValue() ? info.renderValue() : "-",
 		}),
 
 		columnHelper.accessor("createdAt", {
 			header: "CreatedAt",
-			cell: (info) => info.renderValue(),
+			cell: (info) => moment(info.renderValue()).format("MMMM Do YYYY, h:mm a"),
 		}),
 	];
 

@@ -10,8 +10,8 @@ import { toast } from "react-toastify";
 import { AuthContext } from "@/src/lib/auth/appwrite/useAuthUser";
 import { validateEmail } from "@/src/utils";
 import axios from "axios";
- 
-const CompanyDetails = ({companyDetails,setCompanyDetails}) => {
+
+const CompanyDetails = ({ clientId, companyDetails, setCompanyDetails }) => {
 
   /* COMPANY DETAILS VARIABLES */
   const [companyEmail, setCompanyEmail] = useState(companyDetails && companyDetails.company_email ? companyDetails.company_email : "");
@@ -20,70 +20,74 @@ const CompanyDetails = ({companyDetails,setCompanyDetails}) => {
   const [nameThree, setNameThree] = useState(companyDetails && companyDetails.company_name_priority_3 ? companyDetails.company_name_priority_3 : "");
   const [nameFour, setNameFour] = useState(companyDetails && companyDetails.company_name_priority_4 ? companyDetails.company_name_priority_4 : "");
   const [companyObjective, setCompanyObjective] = useState(companyDetails && companyDetails.company_objective ? companyDetails.company_objective : "");
-  const [loading,setLoading] = useState(false)
-  const { authToken, authUser } = useContext(AuthContext) 
-
-  async function handleSubmit(){
-    try{
+  const [loading, setLoading] = useState(false)
+  const { authToken, authUser } = useContext(AuthContext)
+  
+  async function handleSubmit() {
+    try {
       console.log("%c 🍰 companyEmail", "color:#42b983", companyEmail);
       console.log("%c 🌭 nameOne", "color:#b03734", nameOne);
       console.log("%c 🍎 nameTwo", "color:#b03734", nameTwo);
       console.log("%c 🥔 nameThree", "color:#93c0a4", nameThree);
       console.log("%c 🥥 nameFour", "color:#e41a6a", nameFour);
       console.log("%c 🍤 companyObjective", "color:#7f2b82", companyObjective);
-      if(!companyEmail || companyEmail.trim() === ""){
+      console.log("authToken", authToken)
+      if (!companyEmail || companyEmail.trim() === "") {
         toast.error("Please enter a valid email")
         return
-      }else if(!validateEmail(companyEmail)){
+      } else if (!validateEmail(companyEmail)) {
         toast.error("Please enter a valid email")
         return
-      }else if(!nameOne || nameOne.trim() === ""){
+      } else if (!nameOne || nameOne.trim() === "") {
         toast.error("Please enter priority 1 company name")
         return
-      }else if(!nameTwo || nameTwo.trim() === ""){
+      } else if (!nameTwo || nameTwo.trim() === "") {
         toast.error("Please enter priority 2 company name")
         return
-      }else if(!nameThree || nameThree.trim() === ""){
+      } else if (!nameThree || nameThree.trim() === "") {
         toast.error("Please enter priority 3 company name")
         return
-      }else if(!nameFour || nameFour.trim() === ""){
+      } else if (!nameFour || nameFour.trim() === "") {
         toast.error("Please enter priority 4 company name")
         return
-      }else if(!companyObjective || companyObjective.trim() === ""){
+      } else if (!companyObjective || companyObjective.trim() === "") {
         toast.error("Please enter company objective")
         return
       }
-      setLoading(true)
+      setLoading(true);
+      console.log("clientId",clientId)
       const payload = {
-        company_details : {
-          company_email : companyEmail,
-          company_name_priority_1 : nameOne,
-          company_name_priority_2 : nameTwo,
-          company_name_priority_3 : nameThree,
-          company_name_priority_4 : nameFour,
-          company_objective : companyObjective
-        }
+        company_details: {
+          company_email: companyEmail,
+          company_name_priority_1: nameOne,
+          company_name_priority_2: nameTwo,
+          company_name_priority_3: nameThree,
+          company_name_priority_4: nameFour,
+          company_objective: companyObjective
+        },
+        client_id: clientId
       }
 
-      const response = await axios.put("/api/forms/company-details",payload,{
-        headers : {
-          Authorization : authToken
+      const response = await axios.put("/api/form/company-details", payload, {
+        headers: {
+          Authorization: authToken
         }
       })
 
       setCompanyDetails({
-        company_email : companyEmail,
-        company_name_priority_1 : nameOne,
-        company_name_priority_2 : nameTwo,
-        company_name_priority_3 : nameThree,
-        company_name_priority_4 : nameFour,
-        company_objective : companyObjective
+        company_email: companyEmail,
+        company_name_priority_1: nameOne,
+        company_name_priority_2: nameTwo,
+        company_name_priority_3: nameThree,
+        company_name_priority_4: nameFour,
+        company_objective: companyObjective
       })
 
       toast.success("Company Details have been saved successfully!")
       setLoading(false)
-    }catch(error){
+    } catch (error) {
       console.log("%c 🌭 error", "color:#b03734", error);
+      toast.error("Server Error! Please try again later")
       setLoading(false)
     }
   }
@@ -155,7 +159,7 @@ const CompanyDetails = ({companyDetails,setCompanyDetails}) => {
             </div>
           </div>
           <div className="flex items-center justify-end mt-6">
-            <Button 
+            <Button
               type="primary"
               label="Save Details"
               onClick={handleSubmit}

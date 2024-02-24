@@ -2,9 +2,9 @@ import Head from "next/head";
 import React from "react";
 import withAuthUserTokenSSR from "@/src/lib/auth/appwrite/withAuthUserTokenSSR";
 import { getForm } from "../api/form/get-form";
-import PVTForms from "@/src/components/forms/PvtForm";
+import LLPForms from "@/src/components/forms/LlpForm";
 
-export default function PvtFormData({ formData, formFilled, client_id }) {
+export default function OPCFormData({ formData, formFilled, client_id }) {
 	return (
 		<div>
 			<section className="py-5 px-10 h-[calc(100vh-65px)] overflow-auto overflow-x-hidden">
@@ -12,7 +12,7 @@ export default function PvtFormData({ formData, formFilled, client_id }) {
 					<title>User Management</title>
 				</Head>
 
-				<PVTForms client_id={client_id} formData={formData} formFilled={formFilled} />
+				<LLPForms client_id={client_id} formData={formData} formFilled={formFilled} />
 			</section>
 		</div>
 	);
@@ -22,7 +22,7 @@ export const getServerSideProps = withAuthUserTokenSSR({})(async (context) => {
 
 	const { user, token } = context;
 	const cookie = context.req.cookies;
-	console.log("%c 🥃 cookie", "color:#3f7cff", cookie);
+	// console.log("%c 🥃 cookie", "color:#3f7cff", cookie);
 
 
 
@@ -30,9 +30,9 @@ export const getServerSideProps = withAuthUserTokenSSR({})(async (context) => {
 		cookie: cookie,
 		token: token,
 		client_id: context.params.client_id,
-		slug: "pvt-ltd"
+		slug: "llp"
 	})
-	console.log("%c 🍷 data", "color:#4fff4B", data);
+	console.log("%c 🍷 data", "color:#4fff4B", context.params.client_id);
 	if (user && user.$id) {
 		return {
 			props: {

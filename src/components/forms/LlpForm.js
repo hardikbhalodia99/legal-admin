@@ -15,10 +15,11 @@ import PartnerDetails from "@/src/components/forms/Directors/index";
 /* ICONS */
 import { BriefcaseIcon, HomeModernIcon, UserGroupIcon } from "@heroicons/react/24/outline";
 
-const LLPForms = ({formData,formFilled}) => {
-  const [companyDetails,setCompanyDetails] = useState(formData && formData.companyDetails ? formData.companyDetails : {})
-  const [officeDetails,setOfficeDetails] = useState(formData && formData.officeDetails ? formData.officeDetails : {})
-  const [directorDetails,setDirectorDetails] = useState(formData && formData.directorDetails ? formData.directorDetails : [])
+const LLPForms = ({ formData, formFilled, client_id }) => {
+  const clientId = client_id ? client_id : "";
+  const [companyDetails, setCompanyDetails] = useState(formData && formData.companyDetails ? formData.companyDetails : {})
+  const [officeDetails, setOfficeDetails] = useState(formData && formData.officeDetails ? formData.officeDetails : {})
+  const [directorDetails, setDirectorDetails] = useState(formData && formData.directorDetails ? formData.directorDetails : [])
   const faceName = "Partner"
 
   return (
@@ -133,7 +134,7 @@ const LLPForms = ({formData,formFilled}) => {
                 value="company-details"
                 className="px-0 py-1 h-full"
               >
-                <CompanyDetails companyDetails={companyDetails} setCompanyDetails={setCompanyDetails} />
+                <CompanyDetails clientId={clientId} companyDetails={companyDetails} setCompanyDetails={setCompanyDetails} />
               </TabPanel>
 
               {/* OFFICE DETAILS */}
@@ -142,7 +143,7 @@ const LLPForms = ({formData,formFilled}) => {
                 value="office-details"
                 className="px-0 py-1 h-full"
               >
-                <OfficeDetails officeDetails={officeDetails} setOfficeDetails={setOfficeDetails}/>
+                <OfficeDetails clientId={clientId} officeDetails={officeDetails} setOfficeDetails={setOfficeDetails} />
               </TabPanel>
 
               {/* PARTNER DETAILS */}
@@ -151,7 +152,7 @@ const LLPForms = ({formData,formFilled}) => {
                 value="partner-details"
                 className="px-0 py-1 h-full"
               >
-                <PartnerDetails formType="llp" directorsDetails={directorDetails} setDirectorsDetails={setDirectorDetails} faceName={faceName}/>
+                <PartnerDetails clientId={clientId} formType="llp" directorsDetails={directorDetails} setDirectorsDetails={setDirectorDetails} faceName={faceName} />
               </TabPanel>
             </TabsBody>
           </div>
