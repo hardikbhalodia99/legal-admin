@@ -14,6 +14,7 @@ import { UserIcon } from "@heroicons/react/24/outline";
 import IndividualDirector from "./IndividualDirector";
 
 const MultipleDirectors = ({
+	clientId,
 	formType,
 	directorsDetails,
 	setDirectorsDetails,
@@ -86,6 +87,7 @@ const MultipleDirectors = ({
 								className="px-0 py-1 h-full"
 							>
 								<IndividualDirector
+								clientId={clientId}
 									formType={formType}
 									index={selectedDirector}
 									directorsDetails={directorsDetails.find((details) => details.director_number-1 === index )}

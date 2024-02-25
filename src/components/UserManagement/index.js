@@ -2,9 +2,7 @@ import { BriefcaseIcon, HomeModernIcon, UserGroupIcon } from "@heroicons/react/2
 import { Card, CardBody, Tab, TabPanel, Tabs, TabsBody, TabsHeader } from "@material-tailwind/react";
 import Head from "next/head";
 import React from "react";
-import CompanyDetails from "../forms/companyDetails";
-import OfficeDetails from "../forms/officeDetails";
-import PartnerDetails from "../forms/partnerDetails";
+
 import Employees from "./Employees/index";
 import Clients from "./Clients";
 

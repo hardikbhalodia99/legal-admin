@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 import TableComponent from '../core/table';
 import { usePagination } from '@/src/utils/pagination';
 import { getCoreRowModel, useReactTable, getFilteredRowModel } from '@tanstack/react-table';
+import { useRouter } from 'next/router';
 
 export default function OPCUsersTable({totalCount,defaultData,columns}) {
   const [loading,setLoading] = useState(false)
   const [data, setData] = useState(defaultData);
   const { state: paginationState, dispatch } = usePagination();
   const [total, setTotal] = useState(totalCount);
-
+  const router = useRouter()
   const table = useReactTable({
     data,
     columns,
@@ -32,9 +33,8 @@ export default function OPCUsersTable({totalCount,defaultData,columns}) {
             const paginationObj = { ...paginationState, cursor: data[0].id, pageNumber: paginationState.pageNumber - 1 };
           }
         }}
-        onRowClick={(id) => {
-         
-         
+        onRowClick={(rowData) => {
+          router.push(`/opc-users/${rowData.client_id}`)
         }}
         onRowCountSelect={async (count) => {
           dispatch({ type: 'PER_PAGE_COUNT', payload: count });

@@ -14,6 +14,7 @@ import { UserIcon } from "@heroicons/react/24/outline";
 import IndividualNominee from "./IndividualNominee";
 
 const MultipleNominees = ({
+	clientId,
 	formType,
 	nomineeDetails,
 	faceName
@@ -55,7 +56,7 @@ const MultipleNominees = ({
 													</h5>
 													<p className="text-[12px] text-[#808080] font-mabry-regular">
 														Fill the details of the{" "}
-														{faceName ? faceName.toLowerCase() :""}
+														{faceName ? faceName.toLowerCase() : ""}
 													</p>
 												</div>
 											</div>
@@ -79,9 +80,10 @@ const MultipleNominees = ({
 								className="px-0 py-1 h-full"
 							>
 								<IndividualNominee
+									clientId={clientId}
 									formType={formType}
 									index={selectedNominee}
-									nomineeDetails={nomineeDetails.find((details) => details.nominee_number-1 === index )}
+									nomineeDetails={nomineeDetails.find((details) => details.nominee_number - 1 === index)}
 									faceName={faceName}
 								/>
 							</TabPanel>

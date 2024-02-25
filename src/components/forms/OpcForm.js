@@ -29,11 +29,13 @@ import {
   ShieldCheckIcon,
 } from "@heroicons/react/24/outline";
 
-const OPCForms = ({formData,formFilled}) => {
-  const [companyDetails,setCompanyDetails] = useState(formData && formData.companyDetails ? formData.companyDetails : {})
-  const [officeDetails,setOfficeDetails] = useState(formData && formData.officeDetails ? formData.officeDetails : {})
-  const [directorDetails,setDirectorDetails] = useState(formData && formData.directorDetails ? formData.directorDetails : [])
-  const [nomineeDetails,setNomineeDetails] = useState(formData && formData.nomineeDetails ? formData.nomineeDetails : [])
+const OPCForms = ({ formData, formFilled, client_id }) => {
+
+  const clientId = client_id ? client_id : "";
+  const [companyDetails, setCompanyDetails] = useState(formData && formData.companyDetails ? formData.companyDetails : {})
+  const [officeDetails, setOfficeDetails] = useState(formData && formData.officeDetails ? formData.officeDetails : {})
+  const [directorDetails, setDirectorDetails] = useState(formData && formData.directorDetails ? formData.directorDetails : [])
+  const [nomineeDetails, setNomineeDetails] = useState(formData && formData.nomineeDetails ? formData.nomineeDetails : [])
 
   const faceName = "Director"
   return (
@@ -176,7 +178,7 @@ const OPCForms = ({formData,formFilled}) => {
                 value="company-details"
                 className="px-0 py-1 h-full"
               >
-                <CompanyDetails companyDetails={companyDetails} setCompanyDetails={setCompanyDetails} />
+                <CompanyDetails clientId={clientId} companyDetails={companyDetails} setCompanyDetails={setCompanyDetails} />
               </TabPanel>
 
               {/* OFFICE DETAILS */}
@@ -185,7 +187,7 @@ const OPCForms = ({formData,formFilled}) => {
                 value="office-details"
                 className="px-0 py-1 h-full"
               >
-                <OfficeDetails officeDetails={officeDetails} setOfficeDetails={setOfficeDetails}/>
+                <OfficeDetails clientId={clientId} officeDetails={officeDetails} setOfficeDetails={setOfficeDetails} />
               </TabPanel>
 
               {/* PARTNER DETAILS */}
@@ -194,15 +196,15 @@ const OPCForms = ({formData,formFilled}) => {
                 value="nominee-details"
                 className="px-0 py-1 h-full"
               >
-                <MultipleNominees formType="opc" nomineeDetails={nomineeDetails}  faceName={"Nominee"}/>
+                <MultipleNominees clientId={clientId} formType="opc" nomineeDetails={nomineeDetails} faceName={"Nominee"} />
               </TabPanel>
-               {/* PARTNER DETAILS */}
-               <TabPanel
+              {/* PARTNER DETAILS */}
+              <TabPanel
                 key="partner-details"
                 value="partner-details"
                 className="px-0 py-1 h-full"
               >
-                <PartnerDetails formType="opc" directorsDetails={directorDetails}  faceName={faceName}/>
+                <PartnerDetails clientId={clientId} formType="opc" directorsDetails={directorDetails} faceName={faceName} />
               </TabPanel>
             </TabsBody>
           </div>

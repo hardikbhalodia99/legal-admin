@@ -4,7 +4,7 @@ import { usePagination } from '@/src/utils/pagination';
 import { getCoreRowModel, useReactTable, getFilteredRowModel } from '@tanstack/react-table';
 import { useRouter } from 'next/router';
 
-export default function OPCUsersTable({totalCount,defaultData,columns}) {
+export default function TransactionsTable({totalCount,defaultData,columns}) {
   const [loading,setLoading] = useState(false)
   const [data, setData] = useState(defaultData);
   const { state: paginationState, dispatch } = usePagination();
@@ -34,7 +34,7 @@ export default function OPCUsersTable({totalCount,defaultData,columns}) {
           }
         }}
         onRowClick={(rowData) => {
-          router.push(`/llp-users/${rowData.client_id}`)
+          router.push(`/transaction/${rowData.client_id}`)
         }}
         onRowCountSelect={async (count) => {
           dispatch({ type: 'PER_PAGE_COUNT', payload: count });

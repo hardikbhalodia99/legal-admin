@@ -22,14 +22,14 @@ const TableComponent = ({
         <CardBody className="overflow-auto px-0">
         <div className="inline-block min-w-full py-4 p-0.5">
           <div className="overflow-hidden  ">
-            <table className="min-w-full text-center">
+            <table className="min-w-full text-left">
               <thead className="">
                 {table && table?.getHeaderGroups()?.map((headerGroup) => (
                   <tr className="last:pr-8" key={headerGroup.id}>
                     {headerGroup.headers.map((header) => (
                       <th
                         key={header.id}
-                        className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4"
+                        className="border-y border-blue-gray-100 text-left bg-blue-gray-50/50 p-4"
                       >
                         {header.isPlaceholder ? null : (
                           <Typography
@@ -66,7 +66,7 @@ const TableComponent = ({
                             onRowClick(row.original)
                              
                           }}
-                          className="whitespace-nowrap px-5 py-6 text-left last:pr-10 text-[18px] leading-6 font-[375] text-black"
+                          className="whitespace-nowrap px-5 py-6 text-centerleft last:pr-10 text-[18px] leading-6 font-[375] text-black"
                           key={cell.id}
                         >
                           {flexRender(cell.column.columnDef.cell, cell.getContext())}

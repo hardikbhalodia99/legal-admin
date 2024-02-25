@@ -1,5 +1,5 @@
 "use client";
-import { useState,useCallback, useContext } from "react";
+import { useState, useCallback, useContext } from "react";
 
 /* NEXTJS IMPORTS */
 import Image from "next/image";
@@ -16,66 +16,68 @@ import axios from "axios";
 import { InputFile } from "../core/InputFile";
 import { AuthContext } from "@/src/lib/auth/appwrite/useAuthUser";
 
-const OfficeDetails = ({officeDetails,setOfficeDetails}) => {
+const OfficeDetails = ({ clientId, officeDetails, setOfficeDetails }) => {
   const [ownerName, setOwnerName] = useState(officeDetails && officeDetails.owner_name ? officeDetails.owner_name : "");
   const [officeAddress, setOfficeAddress] = useState(officeDetails && officeDetails.address ? officeDetails.address : "");
   const [city, setCity] = useState(officeDetails && officeDetails.city ? officeDetails.city : "");
   const [state, setState] = useState(officeDetails && officeDetails.state ? officeDetails.state : "");
   const [country, setCountry] = useState(officeDetails && officeDetails.country ? officeDetails.country : "");
   const [pinCode, setPinCode] = useState(officeDetails && officeDetails.pin_code ? officeDetails.pin_code : "");
-  const [addressProof, setAddressProof] = useState(officeDetails && officeDetails.documents && officeDetails.documents.address_proof_link ? {link : officeDetails.documents.address_proof_link} : null);
+  const [addressProof, setAddressProof] = useState(officeDetails && officeDetails.documents && officeDetails.documents.address_proof_link ? { link: officeDetails.documents.address_proof_link } : null);
   const [stationName, setStationName] = useState(officeDetails && officeDetails.police_station_name ? officeDetails.police_station_name : "");
   const [stationAddress, setStationAddress] = useState(officeDetails && officeDetails.police_station_address ? officeDetails.police_station_address : "");
-  const [loading,setLoading] = useState(false)
-  const [uploadLoading,setUploadLoading] = useState(false)
-  const { authToken, authUser } = useContext(AuthContext) 
+  const [loading, setLoading] = useState(false)
+  const [uploadLoading, setUploadLoading] = useState(false)
+  const { authToken, authUser } = useContext(AuthContext)
 
-  async function handleSubmit(){
-    try{
-      
-      if(!ownerName || ownerName.trim() === ""){
+  async function handleSubmit() {
+    try {
+
+      if (!ownerName || ownerName.trim() === "") {
         toast.error("Please enter a valid email")
         return
-      }else if(!officeAddress || officeAddress.trim() === ""){
+      } else if (!officeAddress || officeAddress.trim() === "") {
         toast.error("Please enter priority 1 company name")
         return
-      }else if(!city || city.trim() === ""){
+      } else if (!city || city.trim() === "") {
         toast.error("Please enter priority 2 company name")
         return
-      }else if(!state || state.trim() === ""){
+      } else if (!state || state.trim() === "") {
         toast.error("Please enter priority 3 company name")
         return
-      }else if(!country || country.trim() === ""){
+      } else if (!country || country.trim() === "") {
         toast.error("Please enter priority 4 company name")
         return
-      }else if(!pinCode || pinCode.trim() === ""){
+      } else if (!pinCode || pinCode.trim() === "") {
         toast.error("Please enter company objective")
         return
-      }else if(!stationName || stationName.trim() === ""){
+      } else if (!stationName || stationName.trim() === "") {
         toast.error("Please enter priority 4 company name")
         return
-      }else if(!stationAddress || stationAddress.trim() === ""){
+      } else if (!stationAddress || stationAddress.trim() === "") {
         toast.error("Please enter company objective")
         return
       }
 
       setLoading(true)
       const payload = {
-        office_details : {
+        office_details: {
           owner_name: ownerName,
           address: officeAddress,
           city: city,
           state: state,
           country: country,
           pin_code: pinCode,
-          police_station_name : stationName,
-          police_station_address : stationAddress,
-        }
+          police_station_name: stationName,
+          police_station_address: stationAddress,
+        },
+        client_id: clientId
       }
 
-      const response = await axios.put("/api/forms/office-details",payload,{
-        headers : {
-          Authorization : authToken
+      console.log("payload", payload)
+      const response = await axios.put("/api/form/office-details", payload, {
+        headers: {
+          Authorization: authToken
         }
       })
 
@@ -86,47 +88,47 @@ const OfficeDetails = ({officeDetails,setOfficeDetails}) => {
         state: state,
         country: country,
         pin_code: pinCode,
-        police_station_name : stationName,
-        police_station_address : stationAddress,
+        police_station_name: stationName,
+        police_station_address: stationAddress,
       })
 
       toast.success("Office Details have been saved successfully!")
       setLoading(false)
-    }catch(error){
+    } catch (error) {
       console.log("%c 🌭 error", "color:#b03734", error);
       setLoading(false)
     }
   }
 
-  async function uploadDocument({document,setDocument,image_slug}){
-    if(document && document.base64){
-      try{
+  async function uploadDocument({ document, setDocument, image_slug }) {
+    if (document && document.base64) {
+      try {
 
         setUploadLoading(true)
         const payload = {
-          upload_location : "company",
-          image_slug : image_slug,
-          content_type : document.type,
-          image_base64 : document.base64
+          upload_location: "company",
+          image_slug: image_slug,
+          content_type: document.type,
+          image_base64: document.base64
         }
-  
-        const response = await axios.post("/api/forms/upload-document",payload,{
-          headers : {
-            Authorization : authToken
+
+        const response = await axios.post("/api/form/upload-document", payload, {
+          headers: {
+            Authorization: authToken
           }
         })
-  
+
         setDocument({
-          link : response.data.url
+          link: response.data.url
         })
-  
+
         toast.success("Document have been uploaded successfully!")
         setUploadLoading(false)
-      }catch(error){
+      } catch (error) {
         console.log("%c 🌭 error", "color:#b03734", error);
         setUploadLoading(false)
       }
-    }else{
+    } else {
       toast.error("Failed to upload document.")
     }
   }
@@ -194,20 +196,20 @@ const OfficeDetails = ({officeDetails,setOfficeDetails}) => {
                 (Latest Electricity/Mobile Bill)
               </span>
             </p>
-            <InputFile 
-            buttonLabel={"Upload"} 
-            onButtonClick={() => {
-              uploadDocument({
-                document : addressProof,
-                image_slug : "address_proof_link",
-                setDocument : setAddressProof
-              })
-            }} 
-            uploadLoading={uploadLoading}
-            value={addressProof} 
-            setValue={setAddressProof}
+            <InputFile
+              buttonLabel={"Upload"}
+              onButtonClick={() => {
+                uploadDocument({
+                  document: addressProof,
+                  image_slug: "address_proof_link",
+                  setDocument: setAddressProof
+                })
+              }}
+              uploadLoading={uploadLoading}
+              value={addressProof}
+              setValue={setAddressProof}
             />
-           
+
           </div>
           <div className="mt-6">
             <div className="mb-6 bg-[#F5F5FA] rounded-md py-2 px-4">
@@ -236,12 +238,12 @@ const OfficeDetails = ({officeDetails,setOfficeDetails}) => {
             </div>
           </div>
           <div className="flex items-center justify-end mt-6">
-            <Button 
+            <Button
               label={"Save Details"}
               onClick={handleSubmit}
               loading={loading}
             />
-            
+
           </div>
         </form>
       </CardBody>
