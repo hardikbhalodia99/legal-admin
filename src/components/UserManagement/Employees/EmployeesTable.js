@@ -30,7 +30,7 @@ const TABLE_IMAGES = [
 
 
 export function EmployeesTable({employees}) {
-  console.log("%c 🥑 employees", "color:#6ec1c2", employees);
+  console.log("%c 🥑console.log(); employees", "color:#6ec1c2", employees);
   const [data,setData] = useState(employees ? employees : [])
   const [open, setOpen] = useState(false);
   const [selectedEmployee,setSelectedEmployee] = useState(null)
