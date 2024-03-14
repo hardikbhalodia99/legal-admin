@@ -96,10 +96,8 @@ export default function UserManagement({employees}) {
                 value="office-details"
                 className="px-0 py-1 h-full"
               >
-                <Clients />
+                <Clients employees2= {employees}/>
               </TabPanel>
-
-              
             </TabsBody>
           </div>
         </Tabs>

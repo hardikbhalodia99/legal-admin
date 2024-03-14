@@ -16,10 +16,10 @@ import {
 	Tooltip,
 } from "@material-tailwind/react";
 import Button from "../../core/button";
-import { AddEmployeeModal } from "./AddClientModal";
+import { AddClientModal } from "./AddClientModal";
 import { useState } from "react";
 
-const TABLE_HEAD = ["Employee", "Function", "Status", "Employed", ""];
+const TABLE_HEAD = ["Employee", "Function", "Phone", "Status", "UpdatedAt" , ""];
 
 const TABLE_ROWS = [
 	{
@@ -69,10 +69,12 @@ const TABLE_ROWS = [
 	},
 ];
 
-export function ClientTable() {
+export function ClientTable({thunder}) {
+  console.log('thunder: ', thunder);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
-
+  const [data, setData]= useState(thunder);
+  const [selectedEmployee,setSelectedEmployee] = useState(null)
 	return (
     <>
       <Card className="h-full w-full">
@@ -87,20 +89,20 @@ export function ClientTable() {
               </Typography>
             </div>
           </div>
-          <div className="flex flex-col items-center justify-between gap-4 md:flex-row px-5">
-            <div className="w-full md:w-72">
+          <div className="flex flex-col items-center justify-end gap-4 md:flex-row px-5">
+            {/* <div className="w-full md:w-72">
               <Input
                 label="Search"
                 icon={<MagnifyingGlassIcon className="h-5 w-5" />}
               />
-            </div>
+            </div> */}
             <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
               <Button
                 type="primary"
                 size="small"
                 icon={<UserPlusIcon className="w-5 h-5" />}
                 label="Add Client"
-                onClick={handleOpen}
+                onClick={()=>{setSelectedEmployee(null); handleOpen (true)}}
               />
             </div>
           </div>
@@ -109,9 +111,9 @@ export function ClientTable() {
           <table className="mt-4 w-full min-w-max table-auto text-left">
             <thead>
               <tr>
-                {TABLE_HEAD.map((head) => (
+                {TABLE_HEAD.map((head,  index) => (
                   <th
-                    key={head}
+                    key={index}
                     className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4"
                   >
                     <Typography
@@ -126,32 +128,32 @@ export function ClientTable() {
               </tr>
             </thead>
             <tbody>
-              {TABLE_ROWS.map(
-                ({ img, name, email, job, org, online, date }, index) => {
-                  const isLast = index === TABLE_ROWS.length - 1;
+              {data?.map((thunder, index) => {
+               
+                  const isLast = index === data.length - 1;
                   const classes = isLast
                     ? "p-4"
                     : "p-4 border-b border-blue-gray-50";
 
                   return (
-                    <tr key={name}>
+                    <tr key={index}>
                       <td className={classes}>
                         <div className="flex items-center gap-3">
-                          <Avatar src={img} alt={name} size="sm" />
+                          <Avatar src={TABLE_ROWS[0].img} alt={thunder.employee_name} size="sm" />
                           <div className="flex flex-col">
                             <Typography
                               variant="small"
                               color="blue-gray"
                               className="font-normal"
                             >
-                              {name}
+                              {thunder.employee_name}
                             </Typography>
                             <Typography
                               variant="small"
                               color="blue-gray"
                               className="font-normal opacity-70"
                             >
-                              {email}
+                              {thunder.employee_email}
                             </Typography>
                           </div>
                         </div>
@@ -163,24 +165,33 @@ export function ClientTable() {
                             color="blue-gray"
                             className="font-normal"
                           >
-                            {job}
+                            {thunder.employee_type}
                           </Typography>
-                          <Typography
+                          {/* <Typography
                             variant="small"
                             color="blue-gray"
                             className="font-normal opacity-70"
                           >
                             {org}
-                          </Typography>
+                          </Typography> */}
                         </div>
+                      </td>
+                      <td className={classes}>
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal"
+                        >
+                          {thunder.employee_phone}
+                        </Typography>
                       </td>
                       <td className={classes}>
                         <div className="w-max">
                           <Chip
                             variant="ghost"
                             size="sm"
-                            value={online ? "online" : "offline"}
-                            color={online ? "green" : "blue-gray"}
+                            value={thunder.disabled ===0 ? "online" : "offline"}
+                            color={thunder.disabled ===0  ? "green" : "blue-gray"}
                           />
                         </div>
                       </td>
@@ -190,12 +201,15 @@ export function ClientTable() {
                           color="blue-gray"
                           className="font-normal"
                         >
-                          {date}
+                          {thunder.updatedAt}
                         </Typography>
                       </td>
                       <td className={classes}>
                         <Tooltip content="Edit User">
-                          <IconButton variant="text">
+                          <IconButton variant="text" onClick={()=>{
+                            setSelectedEmployee(thunder)
+                            handleOpen(true)
+                          }}>
                             <PencilIcon className="h-4 w-4" />
                           </IconButton>
                         </Tooltip>
@@ -217,7 +231,7 @@ export function ClientTable() {
           </div>
         </CardFooter>
       </Card>
-      <AddEmployeeModal open={open} handleOpen={handleOpen} />
+      <AddClientModal open={open} handleOpen={handleOpen} setData={setData} selectedEmployee={selectedEmployee} />
     
     </>
 	);

@@ -19,7 +19,7 @@ export const DataCard = ({ title, value, icon, up, chart: ChartComponent }) => {
 </div>);
 };
 
-export const StatCard = () =>{
+export const  StatCard = () =>{
   return ( <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 mr-10" >
   <div className="flex flex-col items-start pt-3 px-10 ">
     <small className="text-sm font-medium text-gray-900">Revenue</small>

@@ -44,6 +44,13 @@ const topMenu = [
     link: "/llp-users",
     name: "LLP Clients",
   },
+  {
+    id: 6,
+    icon: <DocumentTextIcon className="w-5 h-5"/>,
+    link: "/new-invoice",
+    name: "New Invoice",
+
+  }
  
 
 ];

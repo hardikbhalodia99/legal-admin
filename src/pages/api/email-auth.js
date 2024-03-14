@@ -34,7 +34,7 @@ export default async function handler(req, res) {
       fallback: fallbackToken,
     })
   } catch (e) {
-    console.log(e.response.data)
-    return res.status(500).json(e.response.data)
+    console.log(e)
+    return res.status(500).json(e)
   }
 }
