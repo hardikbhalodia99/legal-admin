@@ -8,7 +8,6 @@ export default function new_invoice() {
             <Head>
                 <title>Invoice Management</title>
             </Head>
-
             <NewInvoice />
         </section>
     );

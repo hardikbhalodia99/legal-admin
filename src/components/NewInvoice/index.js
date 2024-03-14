@@ -1,31 +1,4 @@
 import React from "react";
-import {
-    Card,
-    CardHeader,
-    Input,
-    Typography,
-    CardBody,
-    Chip,
-    CardFooter,
-    Tabs,
-    TabsHeader,
-    Tab,
-    Avatar,
-    IconButton,
-    Tooltip,
-} from "@material-tailwind/react";
-
-const TABLE_HEAD = [
-    "#",
-    "Item & Description",
-    "HSN/SAC",
-    "Qty",
-    "Rate",
-    "CGST",
-    "SGST",
-    "Amount",
-];
-
 export default function NewInvoice() {
     return (
         <div className=" bg-white  p-10 rounded-2xl">
