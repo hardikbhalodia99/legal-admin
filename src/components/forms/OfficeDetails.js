@@ -16,7 +16,7 @@ import axios from "axios";
 import { InputFile } from "../core/InputFile";
 import { AuthContext } from "@/src/lib/auth/appwrite/useAuthUser";
 
-const OfficeDetails = ({ clientId, officeDetails, setOfficeDetails }) => {
+const OfficeDetails = ({editable, clientId, officeDetails, setOfficeDetails }) => {
   const [ownerName, setOwnerName] = useState(officeDetails && officeDetails.owner_name ? officeDetails.owner_name : "");
   const [officeAddress, setOfficeAddress] = useState(officeDetails && officeDetails.address ? officeDetails.address : "");
   const [city, setCity] = useState(officeDetails && officeDetails.city ? officeDetails.city : "");
@@ -142,6 +142,7 @@ const OfficeDetails = ({ clientId, officeDetails, setOfficeDetails }) => {
               type="text"
               label="Name of the owner or lessee of the premises"
               value={ownerName}
+              disabled={!editable}
               onChange={(value) => setOwnerName(value)}
             />
           </div>
@@ -150,6 +151,7 @@ const OfficeDetails = ({ clientId, officeDetails, setOfficeDetails }) => {
               type="text"
               label="Office Address"
               value={officeAddress}
+              disabled={!editable}
               onChange={(value) => setOfficeAddress(value)}
             />
           </div>
@@ -159,6 +161,7 @@ const OfficeDetails = ({ clientId, officeDetails, setOfficeDetails }) => {
                 type="text"
                 label="City"
                 value={city}
+                disabled={!editable}
                 onChange={(value) => setCity(value)}
               />
             </div>
@@ -167,6 +170,7 @@ const OfficeDetails = ({ clientId, officeDetails, setOfficeDetails }) => {
                 type="text"
                 label="State"
                 value={state}
+                disabled={!editable}
                 onChange={(value) => setState(value)}
               />
             </div>
@@ -177,6 +181,7 @@ const OfficeDetails = ({ clientId, officeDetails, setOfficeDetails }) => {
                 type="text"
                 label="Country"
                 value={country}
+                disabled={!editable}
                 onChange={(value) => setCountry(value)}
               />
             </div>
@@ -185,6 +190,7 @@ const OfficeDetails = ({ clientId, officeDetails, setOfficeDetails }) => {
                 type="text"
                 label="Pin Code"
                 value={pinCode}
+                disabled={!editable}
                 onChange={(value) => setPinCode(value)}
               />
             </div>
@@ -205,6 +211,7 @@ const OfficeDetails = ({ clientId, officeDetails, setOfficeDetails }) => {
                   setDocument: setAddressProof
                 })
               }}
+              disabled={!editable}
               uploadLoading={uploadLoading}
               value={addressProof}
               setValue={setAddressProof}
@@ -225,6 +232,7 @@ const OfficeDetails = ({ clientId, officeDetails, setOfficeDetails }) => {
                 type="text"
                 label="Police Station Name"
                 value={stationName}
+                disabled={!editable}
                 onChange={(value) => setStationName(value)}
               />
             </div>
@@ -233,6 +241,7 @@ const OfficeDetails = ({ clientId, officeDetails, setOfficeDetails }) => {
                 type="text"
                 label="Police Station Address"
                 value={stationAddress}
+                disabled={!editable}
                 onChange={(value) => setStationAddress(value)}
               />
             </div>

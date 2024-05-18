@@ -11,7 +11,7 @@ import { AuthContext } from "@/src/lib/auth/appwrite/useAuthUser";
 import { validateEmail } from "@/src/utils";
 import axios from "axios";
 
-const CompanyDetails = ({ clientId, companyDetails, setCompanyDetails }) => {
+const CompanyDetails = ({ editable, clientId, companyDetails, setCompanyDetails }) => {
 
   /* COMPANY DETAILS VARIABLES */
   const [companyEmail, setCompanyEmail] = useState(companyDetails && companyDetails.company_email ? companyDetails.company_email : "");
@@ -101,6 +101,7 @@ const CompanyDetails = ({ clientId, companyDetails, setCompanyDetails }) => {
               type="email"
               label="Company Email Address"
               value={companyEmail}
+              disabled={!editable}
               onChange={(value) => setCompanyEmail(value)}
             />
           </div>
@@ -119,6 +120,7 @@ const CompanyDetails = ({ clientId, companyDetails, setCompanyDetails }) => {
                   type="text"
                   label={"Priority Name 1"}
                   value={nameOne}
+                  disabled={!editable}
                   onChange={(value) => setNameOne(value)}
                 />
               </div>
@@ -127,6 +129,7 @@ const CompanyDetails = ({ clientId, companyDetails, setCompanyDetails }) => {
                   type="text"
                   label={"Priority Name 2"}
                   value={nameTwo}
+                  disabled={!editable}
                   onChange={(value) => setNameTwo(value)}
                 />
               </div>
@@ -137,6 +140,7 @@ const CompanyDetails = ({ clientId, companyDetails, setCompanyDetails }) => {
                   type="text"
                   label={"Priority Name 3"}
                   value={nameThree}
+                  disabled={!editable}
                   onChange={(value) => setNameThree(value)}
                 />
               </div>
@@ -145,6 +149,7 @@ const CompanyDetails = ({ clientId, companyDetails, setCompanyDetails }) => {
                   type="text"
                   label={"Priority Name 4"}
                   value={nameFour}
+                  disabled={!editable}
                   onChange={(value) => setNameFour(value)}
                 />
               </div>
@@ -154,6 +159,7 @@ const CompanyDetails = ({ clientId, companyDetails, setCompanyDetails }) => {
                 type="text"
                 label={"Main objective of the company"}
                 value={companyObjective}
+                disabled={!editable}
                 onChange={(e) => setCompanyObjective(e.target.value)}
               />
             </div>

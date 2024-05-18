@@ -8,6 +8,7 @@ const TextareaField = (props) => {
       type={props.type}
       label={props.label}
       value={props.value}
+      disabled={props.disabled}
       className={`!border-b-[#DDDDE6] focus:!border-b-[#DDDDE6] !font-mabry-medium !text-sm text-primary-black min-h-[70px] pt-5`}
       labelProps={{
         className:

@@ -14,6 +14,7 @@ import { UserIcon } from "@heroicons/react/24/outline";
 import IndividualDirector from "./IndividualDirector";
 
 const MultipleDirectors = ({
+	editable,
 	clientId,
 	formType,
 	directorsDetails,
@@ -23,12 +24,12 @@ const MultipleDirectors = ({
 	console.log("%c 🍫 directorsDetails", "color:#fca650", directorsDetails);
 	const [selectedDirector, setSelectedDirector] = useState(0);
 
-	useEffect(()=>{
+	useEffect(() => {
 		let elem = document.getElementById("company-details0")
-		if(elem){
+		if (elem) {
 			elem.click()
 		}
-	},[directorsDetails])
+	}, [directorsDetails])
 	return (
 		<Tabs value="hello">
 			<TabsHeader
@@ -63,7 +64,7 @@ const MultipleDirectors = ({
 													</h5>
 													<p className="text-[12px] text-[#808080] font-mabry-regular">
 														Fill the details of the{" "}
-														{faceName ? faceName.toLowerCase() :""}
+														{faceName ? faceName.toLowerCase() : ""}
 													</p>
 												</div>
 											</div>
@@ -77,20 +78,22 @@ const MultipleDirectors = ({
 			</TabsHeader>
 
 			{/* TABS BODY */}
-			<TabsBody className="col-span-4">
+			<TabsBody className="col-span-4" >
 				{directorsDetails.map((data, index) => {
 					return (
 						<>
 							<TabPanel
 								key={"company-details" + index}
 								value={"company-details" + index}
+
 								className="px-0 py-1 h-full"
 							>
 								<IndividualDirector
-								clientId={clientId}
+									editable={editable}
+									clientId={clientId}
 									formType={formType}
 									index={selectedDirector}
-									directorsDetails={directorsDetails.find((details) => details.director_number-1 === index )}
+									directorsDetails={directorsDetails.find((details) => details.director_number - 1 === index)}
 									setDirectorsDetails={setDirectorsDetails}
 									faceName={faceName}
 								/>

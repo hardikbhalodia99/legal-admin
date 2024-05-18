@@ -14,6 +14,7 @@ import { AuthContext } from "@/src/lib/auth/appwrite/useAuthUser";
 import { InputFile } from "../../core/InputFile";
 
 const IndividualDirector = ({
+	editable,
 	clientId,
 	formType,
 	directorsDetails,
@@ -166,6 +167,7 @@ const IndividualDirector = ({
 								<div className="form-group">
 									<InputField
 										type="text"
+										disabled={!editable}
 										label={"Name"}
 										value={currentDirectorDetails.director_name}
 										onChange={(value) => {
@@ -179,6 +181,7 @@ const IndividualDirector = ({
 									<div className="form-group w-full">
 										<InputField
 											type="email"
+											disabled={!editable}
 											label="Email Address"
 											value={currentDirectorDetails.director_email}
 											onChange={(value) => {
@@ -192,6 +195,7 @@ const IndividualDirector = ({
 										<InputField
 											type="text"
 											label="Phone"
+											disabled={!editable}
 											value={currentDirectorDetails.director_phone}
 											onChange={(value) => {
 												let tempData = { ...currentDirectorDetails }
@@ -205,6 +209,7 @@ const IndividualDirector = ({
 									<div className="form-group w-full">
 										<InputField
 											type="text"
+											disabled={!editable}
 											label={"Profit Sharing Ratio"}
 											value={currentDirectorDetails.director_sharing_ratio}
 											onChange={(value) => {
@@ -217,6 +222,7 @@ const IndividualDirector = ({
 									<div className="form-group w-full mt-5 xl:mt-0 lg:mt-0">
 										<InputField
 											type="text"
+											disabled={!editable}
 											label={"Capital Contribution"}
 											value={currentDirectorDetails.director_contribution}
 											onChange={(value) => {
@@ -239,6 +245,7 @@ const IndividualDirector = ({
 												"Private Service",
 												"Government Service",
 											]}
+											disabled={!editable}
 											value={currentDirectorDetails.current_occupation}
 											onChange={(value) => {
 												let tempData = { ...currentDirectorDetails }
@@ -257,6 +264,7 @@ const IndividualDirector = ({
 												tempData.citizenship = value
 												setCurrentDirectorDetails(tempData)
 											}}
+											disabled={!editable}
 										/>
 									</div>
 								</div>
@@ -276,11 +284,13 @@ const IndividualDirector = ({
 												tempData.din_number = value
 												setCurrentDirectorDetails(tempData)
 											}}
+											disabled={!editable}
 										/>
 									</div>
 									<div className="form-group w-full">
 										<InputField
 											type="text"
+											disabled={!editable}
 											label="Duration of stay at present address given as address proof"
 											value={currentDirectorDetails.duration_of_stay_number}
 											onChange={(value) => {
@@ -299,6 +309,7 @@ const IndividualDirector = ({
 									<div className="form-group w-full">
 										<InputField
 											type="text"
+											disabled={!editable}
 											label={"Stay Type"}
 											value={currentDirectorDetails.duration_of_stay_type}
 											onChange={(value) => {
@@ -313,6 +324,7 @@ const IndividualDirector = ({
 									<div className="form-group w-full mt-5 xl:mt-0 lg:mt-0">
 										<InputField
 											type="text"
+											disabled={!editable}
 											label={"Address"}
 											value={currentDirectorDetails.director_address}
 											onChange={(value) => {
@@ -327,6 +339,7 @@ const IndividualDirector = ({
 									<div className="form-group w-full">
 										<InputField
 											type="text"
+											disabled={!editable}
 											label={"City"}
 											value={currentDirectorDetails.director_city}
 											onChange={(value) => {
@@ -339,6 +352,7 @@ const IndividualDirector = ({
 									<div className="form-group w-full mt-5 xl:mt-0 lg:mt-0">
 										<InputField
 											type="text"
+											disabled={!editable}
 											label={"State"}
 											value={currentDirectorDetails.director_state}
 											onChange={(value) => {
@@ -354,6 +368,7 @@ const IndividualDirector = ({
 									<div className="form-group w-full">
 										<InputField
 											type="text"
+											disabled={!editable}
 											label={"PinCode"}
 											value={currentDirectorDetails.director_pin_code}
 											onChange={(value) => {
@@ -366,6 +381,7 @@ const IndividualDirector = ({
 									<div className="form-group w-full mt-5 xl:mt-0 lg:mt-0">
 										<InputField
 											type="text"
+											disabled={!editable}
 											label={"Country"}
 											value={currentDirectorDetails.director_country}
 											onChange={(value) => {

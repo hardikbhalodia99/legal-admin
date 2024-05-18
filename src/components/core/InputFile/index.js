@@ -6,11 +6,11 @@ import Image from "next/image";
 import PdfIcon from "@/public/images/icons/pdf-icon.png";
 import { toast } from "react-toastify";
 
-export function InputFile({ value, setValue, buttonLabel, onButtonClick, id,uploadLoading }) {
+export function InputFile({ disabled, value, setValue, buttonLabel, onButtonClick, id, uploadLoading }) {
 	console.log("%c 🍑 value", "color:#e41a6a", value);
 
 	const [fileData, setFileData] = useState("");
-	const [extension,setExtenstion] = useState(null)
+	const [extension, setExtenstion] = useState(null)
 
 	function handleConversion() {
 		let reader = new FileReader();
@@ -31,34 +31,35 @@ export function InputFile({ value, setValue, buttonLabel, onButtonClick, id,uplo
 	useEffect(() => {
 		if (fileData && (!value || !value.link)) {
 			handleConversion();
-		} 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [fileData]);
 
-	useEffect(()=>{
-		if(value && value.link){
+	useEffect(() => {
+		if (value && value.link) {
 			let linkSplitted = value.link.split(".");
-			setExtenstion(linkSplitted[linkSplitted.length -1])
+			setExtenstion(linkSplitted[linkSplitted.length - 1])
 		}
-	},[value])
+	}, [value])
 	return (
 		<div className="relative flex w-full max-w-[24rem]">
 			<input
 				type="file"
+				disabled={disabled}
 				onChange={(e) => {
 					console.log("%c 🍬 e.target", "color:#42b983", e.target);
 					if (e.target.files.length > 0) {
-						if(e.target.files[0].size > 500000){
-              toast.error("File size must be less than 500kb")
-              return
-            }
-						if(!["application/pdf","image/jpeg","image/jpg","image/png"].includes(e.target.files[0].type)){
-              toast.error("Please upload PNG/JPG/JPEG/PDF file types only")
-              return
-            }
-            console.log("%c 🍋 e.target.files[0].size", "color:#f5ce50", e.target.files[0].size);
+						if (e.target.files[0].size > 500000) {
+							toast.error("File size must be less than 500kb")
+							return
+						}
+						if (!["application/pdf", "image/jpeg", "image/jpg", "image/png"].includes(e.target.files[0].type)) {
+							toast.error("Please upload PNG/JPG/JPEG/PDF file types only")
+							return
+						}
+						console.log("%c 🍋 e.target.files[0].size", "color:#f5ce50", e.target.files[0].size);
 						setFileData(e.target.files[0]);
-					}else{
+					} else {
 						setValue(null)
 					}
 				}}
@@ -70,9 +71,9 @@ export function InputFile({ value, setValue, buttonLabel, onButtonClick, id,uplo
 			/>
 
 			{value && value.link && extension ? (<>
-			
-			
-				
+
+
+
 				{extension === "pdf" ? (<>
 					<a target="_blank" href={value.link} rel="noopener noreferrer">
 
@@ -86,7 +87,7 @@ export function InputFile({ value, setValue, buttonLabel, onButtonClick, id,uplo
 							<div>View File</div>
 
 						</div>
-					
+
 					</a>
 
 				</>) : (<>
@@ -97,24 +98,24 @@ export function InputFile({ value, setValue, buttonLabel, onButtonClick, id,uplo
 								className="w-[100px] h-[100px] rounded-xl"
 								alt="Company Logo"
 							/>
-								<div>View File</div>
+							<div>View File</div>
 
 						</div>
-						
+
 					</a>
 				</>)}
-				
-				
-			
-				</>) : (<>
-			
+
+
+
+			</>) : (<>
+
 				<div className="mt-2 flex items-center gap-6">
 					{value && value.base64 ? (
 						<>
 							<div className="flex items-center justify-center flex-col gap-2 w-[280px] h-[230px] border-dashed border border-[#C1C1CD] rounded-xl">
 
 								{value.type && value.type.includes("image") ? (<>
-								
+
 									<img
 										src={value.base64}
 										className="w-[130px] h-[130px] rounded-xl"
@@ -141,12 +142,12 @@ export function InputFile({ value, setValue, buttonLabel, onButtonClick, id,uplo
 									/>
 									{!uploadLoading ? <>
 										<Button
-											onClick={() => {setFileData(null);setValue(null)}}
+											onClick={() => { setFileData(null); setValue(null) }}
 											label="Remove"
 										/>
 									</> : null}
 								</div>
-								
+
 							</div>
 						</>
 					) : (
