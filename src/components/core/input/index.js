@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState } from "react";
 
 const Input = ({
   label,
@@ -20,11 +20,13 @@ const Input = ({
   subTextClassName,
   ...rest
 }) => {
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div
-      className={`relative ${subText || (error && typeof error !==  "boolean") ? "mb-3" : ""} flex items-center bg-transparent border-[1.25px] rounded-2xl h-14 focus-within:ring-3 
+      className={`relative ${
+        subText || (error && typeof error !== "boolean") ? "mb-3" : ""
+      } flex items-center bg-transparent border-[1.25px] rounded-2xl h-14 focus-within:ring-3 
       
       ${
         !!error
@@ -47,27 +49,31 @@ const Input = ({
         value={value}
         disabled={disabled}
         onChange={(e) => {
-          const caretStart = e.target.selectionStart
-          onChange(e.target.value)
+          const caretStart = e.target.selectionStart;
+          onChange(e.target.value);
           if (resetCursor) {
             setTimeout(() => {
               // restore cursor position
-              e.target.setSelectionRange(caretStart, caretStart)
-            }, 0)
+              e.target.setSelectionRange(caretStart, caretStart);
+            }, 0);
           }
         }}
         className={`focus:outline-none bg-transparent  w-full text-base peer mx-2 ${
           !!PrefixIcon ? `pl-0.5 -ml-1 left-10` : `pl-1.5 left-0`
         } ${
           !!label ? "pt-3" : ""
-        } focus:pt-px pr-2 block placeholder-transparent text-neutral-content placeholder-shown:pt-0 disabled:bg-transparent`}
+        } focus:pt-px pr-2 block placeholder-transparent text-neutral-content placeholder-shown:pt-0 disabled:bg-transparent font-mabry-regular`}
         placeholder={label}
         {...rest}
       />
-      {!!unit && <span className="ml-3 bg-color-neutral-99  rounded-r-2xl h-[54px]">{unit}</span>}
+      {!!unit && (
+        <span className="ml-3 bg-color-neutral-99  rounded-r-2xl h-[54px]">
+          {unit}
+        </span>
+      )}
       {!!label && (
         <label
-          className={`absolute pointer-events-none ${
+          className={`absolute font-mabry-regular pointer-events-none ${
             !!PrefixIcon ? "left-10" : "left-3.5"
           } text-[12px] top-1.5 peer-placeholder-shown:text-base peer-focus:rounded-md peer-placeholder-shown:top-3 peer-focus:px-1 peer-focus:-top-3 ${
             labelBg ? labelBg : "peer-focus:bg-[#FFEDE7]"
@@ -79,7 +85,10 @@ const Input = ({
         </label>
       )}
       {type === "password" ? (
-        <span className=" peer-focus:text-primary" onClick={() => setShowPassword((x) => !x)}>
+        <span
+          className=" peer-focus:text-primary"
+          onClick={() => setShowPassword((x) => !x)}
+        >
           {showPassword ? (
             <svg
               width="24"
@@ -89,7 +98,14 @@ const Input = ({
               fill="currentColor"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <mask id="mask0_1507_6523" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+              <mask
+                id="mask0_1507_6523"
+                maskUnits="userSpaceOnUse"
+                x="0"
+                y="0"
+                width="24"
+                height="24"
+              >
                 <rect width="24" height="24" fill="#D9D9D9" />
               </mask>
               <g mask="url(#mask0_1507_6523)">
@@ -108,7 +124,14 @@ const Input = ({
               fill="currentColor"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <mask id="mask0_1507_6534" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+              <mask
+                id="mask0_1507_6534"
+                maskUnits="userSpaceOnUse"
+                x="0"
+                y="0"
+                width="24"
+                height="24"
+              >
                 <rect width="24" height="24" fill="#D9D9D9" />
               </mask>
               <g mask="url(#mask0_1507_6534)">
@@ -171,7 +194,7 @@ const Input = ({
         </span>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Input
+export default Input;
