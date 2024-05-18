@@ -1,4 +1,4 @@
-import { HomeIcon, UserGroupIcon, Cog8ToothIcon, CurrencyRupeeIcon, DocumentTextIcon, IdentificationIcon } from "@heroicons/react/24/solid";
+import { HomeIcon, UserGroupIcon, Cog8ToothIcon, CurrencyRupeeIcon, DocumentTextIcon, IdentificationIcon, ArchiveBoxIcon, InboxIcon, DocumentIcon, WalletIcon } from "@heroicons/react/24/solid";
 
 
 const topMenu = [
@@ -43,6 +43,31 @@ const topMenu = [
     icon: <IdentificationIcon className="w-5 h-5"/>,
     link: "/llp-users",
     name: "LLP Clients",
+  },
+
+  {
+    id: 6,
+    icon: <ArchiveBoxIcon className="w-5 h-5"/>,
+    link: "/gst-return",
+    name: "GST Return",
+  },
+  {
+    id: 7,
+    icon: <WalletIcon className="w-5 h-5"/>,
+    link: "/accounting",
+    name: "Accounting",
+  },
+  {
+    id: 8,
+    icon: <DocumentIcon className="w-5 h-5"/>,
+    link: "/tds-return",
+    name: "TDS Return",
+  },
+  {
+    id: 9,
+    icon: <InboxIcon className="w-5 h-5"/>,
+    link: "/professional-tax",
+    name: "Professional Tax",
   },
  
 
